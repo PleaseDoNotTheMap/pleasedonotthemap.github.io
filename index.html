@@ -1,0 +1,513 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Please Do Not The Map!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+   <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/assets/Favicon-CQV-YujZ.png">
+
+  <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCunx3DEkoYwHYb0RYa4hK6wZYDug9Z2qI&libraries=places"></script>
+   
+
+  <script type="module" crossorigin src="/assets/index-op4GoWDr.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Cr1xjNZP.css">
+</head>
+<body>
+
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <!-- Mobile menu button-->
+          <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!--
+              Icon when menu is closed.
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!--
+              Icon when menu is open.
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex flex-shrink-0 items-center">
+            <img class="h-16 w-auto" src="/assets/Logo-C8p1JjAE.png" alt="pweasedonotcat">
+          </div>
+          <div class="hidden sm:ml-6 sm:block">
+            <div class="flex space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <h1 class="py-2 font-medium text-white" aria-current="page">Please Do Not The Map</h1>
+              <!-- <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a>
+              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <!-- <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            <span class="absolute -inset-1.5"></span>
+            <span class="sr-only">View notifications</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          </button>
+   -->
+          <!-- Profile dropdown -->
+          <div x-data="{ open: false }" class="relative ml-3">
+            <div>
+              <button 
+              @click="open = !open" 
+              type="button" 
+              class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" 
+              id="user-menu-button" 
+              aria-expanded="false" 
+              aria-haspopup="true"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full" src="/assets/profileholder-C3nh64Wb.jpg" alt="">
+              </button>
+            </div>
+  
+            <!--
+              Dropdown menu, show/hide based on menu state.
+  
+              Entering: "transition ease-out duration-100"
+                From: "transform opacity-0 scale-95"
+                To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+                From: "transform opacity-100 scale-100"
+                To: "transform opacity-0 scale-95"
+            -->
+            <div 
+                x-show="open" 
+                @click.away="open = false"
+                x-transition:enter="transition ease-out duration-100 transform"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75 transform"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" 
+                style="display: none;"
+                >
+              <!-- Active: "bg-gray-100", Not Active: "" -->
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="sm:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <h1 class="py-2 text-base font-medium text-white" aria-current="page">Please Do Not Map</h1>
+        
+        <!-- <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
+        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a> -->
+    
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+  <div x-data="{ open: false, modalOpen: false }" class="relative" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <!-- Button to open the panel -->
+    
+  <gmpx-api-loader key="AIzaSyCunx3DEkoYwHYb0RYa4hK6wZYDug9Z2qI" solution-channel="GMP_GE_placepicker_v1"></gmpx-api-loader>
+  <div>
+    <label for="price" class="block text-sm font-medium leading-6 text-black-700">d</label>
+    <div class="block text-sm relative mt-2 rounded-md shadow-sm">
+
+      <input class="rounded-md mt-6 ml-6 px-4 py-3 border-2 border-gray-300 shadow-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-300 ease-in-out bg-gradient-to-r from-white to-gray-100 text-black-700 placeholder-gray-400" 
+      type="location" 
+      placeholder="Search Location" 
+      id="locationInput">  
+      <div class="absolute inset-y-0 right-0 flex items-center">
+        <label for="currency" class="sr-only">Currency</label>
+      </div>
+    </div>
+  </div>
+  
+
+<button @click="open = !open" 
+    type="button" 
+    class=" ml-6 mt-6 rounded-full  text-white hover:ring-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 right-0"
+    aria-expanded="false" 
+    aria-haspopup="true"
+    >
+    
+        <svg class="h-8 w-8" viewBox="0 0 24 24">
+          <!-- Outer circle filled with white -->
+          <circle cx="12" cy="12" r="11" fill="white" />
+      
+          <!-- Pin body with background color (gray-800) -->
+          <path fill="gray-800" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.686 2 6 4.686 6 8c0 3.314 6 12 6 12s6-8.686 6-12c0-3.314-2.686-6-6-6z"/>
+      
+          <!-- Circle inside the pin, filled with red -->
+          <circle cx="12" cy="8" r="3" fill="white" stroke-width="1" />
+        </svg>
+        <span class="sr-only">Open menu</span>
+      </button>
+
+    <!-- Background backdrop for panel -->
+    <div
+        x-show="open" 
+        x-transition:enter="transition ease-out duration-100 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="fixed inset-0 bg-opacity-75 transition-opacity" 
+        style="display: none;"
+    ></div>
+
+    <!-- Drawer Panel -->
+    <div x-show="open" 
+        x-transition:enter="transition ease-out duration-100 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="fixed inset-0 overflow-hidden"
+    >
+        <div class="relative inset-0 overflow-hidden">
+            <div class="pointer-events-auto fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <div class="pointer-events-auto relative w-screen max-w-md">
+                    <div class="relative left-0 mt-18 flex pr-2 sm:-ml-10 sm:pr-4">
+
+                    </div>
+
+                    <div class="flex rounded-md h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                        <div class="px-4 sm:px-6">
+                            <h2 class="text-base font-medium leading-6 text-gray-900" id="slide-over-title">Pin Me Up For Satellite!</h2>
+                        </div>
+                        <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                          <div>
+                            <div>
+                              <label for="coordinates" class="block text-base font-semibold leading-6 text-gray-900">Latitude, Longitude</label>
+                              <div class="relative mt-2 rounded-md shadow-sm">
+                                <input type="text" name="coordinates" id="coordinates" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Enter coordinates (e.g., 37.7749, -122.4194)" required>
+                              </div>
+                            </div>
+                          <p></p>
+              
+                              <button @click="open = false" class="mt-4 bg-gray-800 text-white px-4 py-2 rounded-md">Close</button>
+                          </div>
+                          <div class="relative mt-2 rounded-md shadow-sm">
+                            
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div x-show="modalOpen"
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 flex items-center justify-center z-20">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg p-5 z-30">
+            <h2 class="text-lg font-semibold">Modal Title</h2>
+            <p>This is the content of the modal.</p>
+            <div class="mt-4">
+                <button @click="modalOpen = false" class="bg-gray-800 text-white px-4 py-2 rounded-md">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  
+<div>
+<button
+    type="button" 
+    class=" ml-6 mt-6 rounded-full  text-white hover:ring-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 right-0"
+
+    >
+    
+    <svg class="h-8 w-8" viewBox="0 0 24 24">
+      <!-- Outer circle filled with white -->
+      <circle cx="12" cy="12" r="11" fill="white" />
+    
+      <!-- Fully filled download arrow in gray-800 -->
+      <path fill="gray-800" d="M12 3v10m-4-4l4 4 4-4" />
+    
+      <!-- Base of the download arrow -->
+      <rect x="8" y="16" width="8" height="2" fill="#141317" />
+    </svg>
+    
+        <span class="sr-only">Open menu</span>
+      </button>
+    </div>
+
+
+    <div x-data="{ NewModalOpen: false }" class="relative" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+
+
+      <div>
+        <button
+            type="button" 
+            @click="NewModalOpen = true"
+            class=" ml-6 mt-6 rounded-full  text-white hover:ring-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 right-0"
+        
+            >
+            
+            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="#141317" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer circle filled with white -->
+              <circle cx="12" cy="12" r="12" fill="white" />
+              
+              <!-- Email envelope shape -->
+              <path fill="gray-800" d="M3 8.5L12 13.5L21 8.5V16.5C21 17.3284 20.3284 18 19.5 18H4.5C3.67157 18 3 17.3284 3 16.5V8.5Z" />
+              <path fill="gray-800" d="M21 8.5L12 13.5L3 8.5" stroke="gray-800" stroke-width="2" />
+            </svg>
+            
+                <span class="sr-only">Open menu</span>
+              </button>
+            </div>
+
+              <!-- Modal -->
+    <div x-show="NewModalOpen"
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 flex items-center justify-center z-20">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg p-5 z-30">
+         
+
+ 
+          
+          <div x-data="formHandler" >
+          
+          <form @submit.prevent="submitForm">
+
+
+ 
+
+            <div class="sm:col-span-4">
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">Give me your information.</p>
+          </div>
+
+
+
+                 
+            <div class="sm:col-span-4">
+              <label for="emailInput">Your Email</label>
+              
+             
+              <div class="sm:col-span-4">
+                <div class="mt-2">
+
+                <input class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="email" placeholder=" cat@spacemail.com" id="emailInput" x-model="email" required>
+              </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-4">
+              <label for="nameInput">Your Name</label>
+             
+              <div class="sm:col-span-4">
+                <div class="mt-2">
+                <input class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"  type="text" 
+                placeholder=" Kitten" id="nameInput" x-model="name" required>
+             </div>
+             </div>
+            </div>
+
+            <div class="sm:col-span-4">
+              <label for="phoneInput">Your Phone Number</label>
+             
+              <div class="sm:col-span-4">
+                <input class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"  type="text" type="tel" placeholder=" 111-222-3333" id="phoneInput" x-model="phoneNumber" required>
+             </div>
+            </div>
+          
+
+            <div class="sm:col-span-4">
+              <label for="locationInput">Where's the flyover location you'd like to be notified of?</label>
+              <gmpx-api-loader key="AIzaSyCz--Lf8sT9jaHF8CN2jy2wSVYLWuuopVo" solution-channel="GMP_GE_placepicker_v1"></gmpx-api-loader>
+              <div class="sm:col-span-4">
+                <input class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"  type = "text" placeholder=" University of Waterloo" 
+                id="locationInput2" 
+                x-model="location" required></textarea>
+             </div>
+            </div>
+
+            <div class="sm:col-span-4">
+            <label for="exampleRecipientInput">When would you like to be notified?</label>
+            
+            
+            <div class="sm:col-span-4">
+ 
+            <select x-model="dropdown" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" id="exampleRecipientInput">
+            <option value='0'> I do not want to get notified</option>
+            <option value='1'> A day before</option>
+            <option value='2'> A week before</option>
+            </select>
+  </div>
+  </div>
+
+
+             <div class="mt-4">
+            <button class ="bg-blue-600 text-white px-4 py-2 rounded-md" type="submit">Submit</button>
+            
+              <button @click="NewModalOpen = false" class="bg-gray-800 text-white px-4 py-2 rounded-md">Close</button>
+   </div>
+
+          </form>
+          <p x-show="successMessage" style="color: green;">Form submitted!</p>
+          
+          
+          </div>
+          
+
+
+          
+          <script>
+            function formHandler() {
+                      return {
+                          email: null,
+                          name: null,
+                          location: null,
+                          lat: null,
+                          long: null,
+                          addressPretty: null,
+                          addressComponents: null,
+                          phoneNumber: null,
+                          dropdown: null,
+                          successMessage: false,
+          
+                          init() {
+                              this.initAutocomplete();
+                              this.initAutocomplete2();
+                          },
+          
+                          initAutocomplete() {
+                              const autocompleteInput = document.getElementById('locationInput');
+
+                                this.placeAutocomplete = new google.maps.places.Autocomplete(autocompleteInput);
+            
+                                this.placeAutocomplete.addListener('place_changed', () => {
+                                    const place = this.placeAutocomplete.getPlace();
+                                    if (place && place.geometry) {
+                                        console.log(place)
+                                        this.lat = place.geometry.location.lat()
+                                        this.long = place.geometry.location.lng()
+                                        this.addressPretty = place.formatted_address
+                                        this.addressComponents = place.address_components
+                                        }
+                                    });
+                            
+ 
+                          },
+
+                          initAutocomplete2() {
+                              const autocompleteInput = document.getElementById('locationInput2');
+
+                                this.placeAutocomplete = new google.maps.places.Autocomplete(autocompleteInput);
+            
+                                this.placeAutocomplete.addListener('place_changed', () => {
+                                    const place = this.placeAutocomplete.getPlace();
+                                    if (place && place.geometry) {
+                                        console.log(place)
+                                        this.lat = place.geometry.location.lat()
+                                        this.long = place.geometry.location.lng()
+                                        this.addressPretty = place.formatted_address
+                                        this.addressComponents = place.address_components
+                                        }
+                                    });
+                            },
+          
+                          async submitForm() {
+                              try {
+                                  console.log(this.phoneNumber)
+          
+                                  let response = await axios.get(`http://0.0.0.0:8080/`);
+                                  console.log(response)
+          
+                                  let payload = {
+                                      name: this.name,
+                                      email: this.email,
+                                      phone_number: this.phoneNumber,
+                                      notify_date: this.dropdown,
+                                      flyover_date: 0,
+                                      lat: this.lat,
+                                      long: this.long,
+                                      address_pretty: this.addressPretty,
+                                      address_components: this.addressComponents
+                                  }
+          
+                                  response = await axios.post('http://0.0.0.0:8080/submit', payload)
+                                  console.log(response)
+          
+                                  this.successMessage = true;
+          
+                                  // Reset form fields
+                                  this.email = null;
+                                  this.name = null;
+                                  this.location = null;
+                                  this.phoneNumber = null;
+                                  this.dropdown = null;
+          
+                              } catch (error) {
+                                  console.error('Error submitting form:', error);
+                              }
+                          },
+                      }
+                  }
+            </script>
+          
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+<div class="bg-gray-800">
+  <div class="bg-gray-800" id="globe"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
+</body>
+</html>
